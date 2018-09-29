@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- WARNING: Eclipse auto-generated file.
+              Any modifications will be overwritten.
+              To include a user specific buildfile here, simply create one in the same
+              directory with the processing instruction <?eclipse.ant.import?>
+              as the first entry and export the buildfile again. --><project basedir="." default="build" name="HelloWorld">
+    <property environment="env"/>
+    <property name="ECLIPSE_HOME" value="../../eclipse/jee-2018-09/eclipse/"/>
+    <property name="debuglevel" value="source,lines,vars"/>
+    <property name="target" value="1.7"/>
+    <property name="source" value="1.7"/>
+    <path id="Server Library [Apache Tomcat v8.0] (unbound).libraryclasspath"/>
+    <path id="Web App Libraries.libraryclasspath"/>
+    <path id="EAR Libraries.libraryclasspath"/>
+    <path id="Apache Tomcat v8.0 [Apache Tomcat 8.0.36].libraryclasspath">
+        <pathelement location="../../eclipse/eclipse-inst-linux64/eclipse-installer/lib/jsp-api.jar"/>
+        <pathelement location="../../eclipse/eclipse-inst-linux64/eclipse-installer/lib/tomcat-i18n-es.jar"/>
+        <pathelement location="../../eclipse/eclipse-inst-linux64/eclipse-installer/lib/websocket-api.jar"/>
+        <pathelement location="../../eclipse/eclipse-inst-linux64/eclipse-installer/lib/servlet-api.jar"/>
+        <pathelement location="../../eclipse/eclipse-inst-linux64/eclipse-installer/lib/tomcat-i18n-fr.jar"/>
+        <pathelement location="../../eclipse/eclipse-inst-linux64/eclipse-installer/lib/catalina-storeconfig.jar"/>
+        <pathelement location="../../eclipse/eclipse-inst-linux64/eclipse-installer/lib/ecj-4.2.2.jar"/>
+        <pathelement location="../../eclipse/eclipse-inst-linux64/eclipse-installer/lib/tomcat-coyote.jar"/>
+        <pathelement location="../../eclipse/eclipse-inst-linux64/eclipse-installer/lib/ecj-4.5.jar"/>
+        <pathelement location="../../eclipse/eclipse-inst-linux64/eclipse-installer/lib/annotations-api.jar"/>
+        <pathelement location="../../eclipse/eclipse-inst-linux64/eclipse-installer/lib/jasper.jar"/>
+        <pathelement location="../../eclipse/eclipse-inst-linux64/eclipse-installer/lib/tomcat-dbcp.jar"/>
+        <pathelement location="../../eclipse/eclipse-inst-linux64/eclipse-installer/lib/catalina.jar"/>
+        <pathelement location="../../eclipse/eclipse-inst-linux64/eclipse-installer/lib/catalina-ha.jar"/>
+        <pathelement location="../../eclipse/eclipse-inst-linux64/eclipse-installer/lib/jasper-el.jar"/>
+        <pathelement location="../../eclipse/eclipse-inst-linux64/eclipse-installer/lib/tomcat-util-scan.jar"/>
+        <pathelement location="../../eclipse/eclipse-inst-linux64/eclipse-installer/lib/tomcat-i18n-ja.jar"/>
+        <pathelement location="../../eclipse/eclipse-inst-linux64/eclipse-installer/lib/tomcat7-websocket.jar"/>
+        <pathelement location="../../eclipse/eclipse-inst-linux64/eclipse-installer/lib/tomcat-api.jar"/>
+        <pathelement location="../../eclipse/eclipse-inst-linux64/eclipse-installer/lib/tomcat-websocket.jar"/>
+        <pathelement location="../../eclipse/eclipse-inst-linux64/eclipse-installer/lib/catalina-ant.jar"/>
+        <pathelement location="../../eclipse/eclipse-inst-linux64/eclipse-installer/lib/catalina-tribes.jar"/>
+        <pathelement location="../../eclipse/eclipse-inst-linux64/eclipse-installer/lib/tomcat-jni.jar"/>
+        <pathelement location="../../eclipse/eclipse-inst-linux64/eclipse-installer/lib/el-api.jar"/>
+        <pathelement location="../../eclipse/eclipse-inst-linux64/eclipse-installer/lib/tomcat-jdbc.jar"/>
+        <pathelement location="../../eclipse/eclipse-inst-linux64/eclipse-installer/lib/tomcat-util.jar"/>
+    </path>
+    <path id="HelloWorld.classpath">
+        <pathelement location="build/classes"/>
+        <path refid="Server Library [Apache Tomcat v8.0] (unbound).libraryclasspath"/>
+        <path refid="Web App Libraries.libraryclasspath"/>
+        <path refid="EAR Libraries.libraryclasspath"/>
+        <path refid="Apache Tomcat v8.0 [Apache Tomcat 8.0.36].libraryclasspath"/>
+    </path>
+    <target name="init">
+        <mkdir dir="build/classes"/>
+        <copy includeemptydirs="false" todir="build/classes">
+            <fileset dir="src">
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="clean">
+        <delete dir="build/classes"/>
+    </target>
+    <target depends="clean" name="cleanall"/>
+    <target depends="build-subprojects,build-project" name="build"/>
+    <target name="build-subprojects"/>
+    <target depends="init" name="build-project">
+        <echo message="${ant.project.name}: ${ant.file}"/>
+        <javac debug="true" debuglevel="${debuglevel}" destdir="build/classes" includeantruntime="false" source="${source}" target="${target}">
+            <src path="src"/>
+            <classpath refid="HelloWorld.classpath"/>
+        </javac>
+    </target>
+    <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
+    <target description="copy Eclipse compiler jars to ant lib directory" name="init-eclipse-compiler">
+        <copy todir="${ant.library.dir}">
+            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
+        </copy>
+        <unzip dest="${ant.library.dir}">
+            <patternset includes="jdtCompilerAdapter.jar"/>
+            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
+        </unzip>
+    </target>
+    <target description="compile project with Eclipse compiler" name="build-eclipse-compiler">
+        <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
+        <antcall target="build"/>
+    </target>
+  	<target name="war" description="Bundles the application as a WAR file" depends="clean, build">
+  	    <mkdir dir="WebContent/WEB-INF/classes"/>
+  	     
+  	    <copy includeemptydirs="false" todir="WebContent/WEB-INF/classes">
+  	            <fileset dir="build/classes">
+  	            <include name="**/*.class"/>
+  	            </fileset>
+  	    </copy>
+  	     
+  	    <war destfile="HellloWorld.war"
+  	        basedir="WebContent"
+  	        needxmlfile="false">
+  	    </war>
+  	</target>
+</project>
