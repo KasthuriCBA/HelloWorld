@@ -84,7 +84,15 @@
   	  	        needxmlfile="false">
   	  	    </war>
   	  	</target> -->
-              	<target name="war" depends="">
+              	<property name="build-directory" value="build" />
+              	<property name="war-file-name" value="HelloWorld.war" />
+              	<property name="classes-directory" value="bin" />
+              	<property name="builder" value="Payable" />
+              	<tstamp prefix="build-info">
+              			<format property="current-date" pattern="d-MMMM-yyyy" locale="en" />
+              			<format property="current-time" pattern="hh:mm:ss a z" locale="en" />
+              	</tstamp>
+              	<target name="war" depends="build">
               			<mkdir dir="${build-directory}" />
               			<delete file="${build-directory}/${war-file-name}" />
               			<war warfile="${build-directory}/${war-file-name}" needxmlfile="false">
